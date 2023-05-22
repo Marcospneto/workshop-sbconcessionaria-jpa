@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Veiculo implements Serializable{
@@ -14,10 +15,15 @@ public class Veiculo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank (message = " Campo marca é obrigatorio!")
 	private String marca;
+	@NotBlank (message = " Campo modelo é obrigatorio!")
 	private String modelo;
+	@NotBlank (message = " Campo ano é obrigatorio!")
 	private String ano;
+	@NotBlank (message = " Campo cor é obrigatorio!")
 	private String cor;
+	@NotBlank (message = " Campo valor é obrigatorio!")
 	private float valor;
 
 	

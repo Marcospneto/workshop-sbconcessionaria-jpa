@@ -35,7 +35,7 @@ public class TesteConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+	/*	
 		Cliente c1 = new Cliente(null, "Marcos", "09565015409" , "30/10/20");
 		Cliente c2 = new Cliente(null, "Larissa", "11899755489" , "20/10/15");
 		clienteRepositorio.saveAll(Arrays.asList(c1, c2));
@@ -58,7 +58,7 @@ public class TesteConfig implements CommandLineRunner {
 		Venda ven2 = new Venda(null, "08/04/2023", "350.000,00", "Dinheiro", "Rosangela",c1 );
 		vendaRepositorio.saveAll(Arrays.asList(ven1, ven2));
 		
-		
+		*/
 		
 	}
 }

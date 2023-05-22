@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Venda implements Serializable {
@@ -16,9 +17,13 @@ public class Venda implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank (message = " Campo datavenda é obrigatorio!")
 	private String datavenda;
+	@NotBlank (message = " Campo valortotalvenda é obrigatorio!")
 	private String valortotalvenda;
+	@NotBlank (message = " Campo formapagamento é obrigatorio!")
 	private String formapagamento;
+	@NotBlank (message = " Campo vendedor é obrigatorio!")
 	private String vendedor;
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jvm.sbconcessionaria.model.entidade.Cliente;
 import br.com.jvm.sbconcessionaria.model.servicos.ClienteServico;
+import jakarta.validation.Valid;
 
 @RestController 
 @RequestMapping(value = "/client") //ENDERECO QUE SERÀ ULTILIZANDO PARA MAPEAR OS CLIENTES
@@ -39,7 +40,7 @@ public class ClienteResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cliente> insert(@RequestBody Cliente obj){
+	public ResponseEntity<Cliente> insert(@Valid @RequestBody Cliente obj){
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
 				 buildAndExpand(obj.getId()).toUri();

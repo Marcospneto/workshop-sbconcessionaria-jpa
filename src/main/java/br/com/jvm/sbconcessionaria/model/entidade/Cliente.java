@@ -11,6 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cliente implements Serializable {
@@ -19,8 +22,11 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank (message = " Nome é um campo obrigatorio!")
 	private String nome;
+	@NotBlank (message = " CPF é um campo obrigatorio!")
 	private String cpf;
+	@NotBlank (message = " Data de cadastro é um campo obrigatorio!")
 	private String datacadastro;
 	
 	@JsonIgnore

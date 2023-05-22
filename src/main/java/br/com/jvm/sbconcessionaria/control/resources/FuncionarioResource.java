@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jvm.sbconcessionaria.model.entidade.Funcionario;
 import br.com.jvm.sbconcessionaria.model.servicos.FuncionarioServico;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "funcionarios")
@@ -38,7 +39,7 @@ public class FuncionarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Funcionario> insert (@RequestBody Funcionario obj){
+	public ResponseEntity<Funcionario> insert (@Valid @RequestBody Funcionario obj){
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(obj.getId()).toUri();

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jvm.sbconcessionaria.model.entidade.Veiculo;
 import br.com.jvm.sbconcessionaria.model.servicos.VeiculoServico;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/veiculos")
@@ -38,7 +39,7 @@ public class VeiculoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Veiculo> insert (@RequestBody Veiculo obj){
+	public ResponseEntity<Veiculo> insert (@Valid @RequestBody Veiculo obj){
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(obj.getId()).toUri();

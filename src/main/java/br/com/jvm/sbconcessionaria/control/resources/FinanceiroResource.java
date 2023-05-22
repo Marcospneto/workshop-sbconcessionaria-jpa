@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jvm.sbconcessionaria.model.entidade.Financeiro;
 import br.com.jvm.sbconcessionaria.model.servicos.FinanceiroServico;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/financeiro")
@@ -39,7 +40,7 @@ public class FinanceiroResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Financeiro> insert (@RequestBody Financeiro obj){
+	public ResponseEntity<Financeiro> insert (@Valid @RequestBody Financeiro obj){
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id})")
 				.buildAndExpand(obj.getId()).toUri();
