@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.jvm.sbconcessionaria.model.entidade.Cliente;
+import br.com.jvm.sbconcessionaria.model.estruturas.ListaEncadeada;
 import br.com.jvm.sbconcessionaria.model.repositories.ClienteRepositorio;
 @Service
 public class ClienteServico {
@@ -14,6 +15,12 @@ public class ClienteServico {
 	//INSTANCIA DO REPOSITORIO PARA LIGAR O SERVICO COM O REPOSITORIO
 	@Autowired
 	private ClienteRepositorio repositorio;
+	@Autowired
+	private ListaEncadeada listaEncadeada;
+	
+	public ClienteServico() {
+		listaEncadeada = new ListaEncadeada();
+	}
 	
 	//METODO PARA LISTAR CLIENTE
 	public List <Cliente> findAll(){
@@ -28,7 +35,9 @@ public class ClienteServico {
 	
 	//METODO PARA INSERIR CLIENTE
 	public Cliente insert (Cliente obj) {
+		listaEncadeada.inserir(obj);
 		return repositorio.save(obj);
+		
 	}
 	
 	//METODO PARA DELETAR CLIENTE

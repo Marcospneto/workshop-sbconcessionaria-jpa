@@ -6,14 +6,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.jvm.sbconcessionaria.model.estruturas.ListaEncadeada;
+import br.com.jvm.sbconcessionaria.model.estruturas.No;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cliente implements Serializable {
@@ -22,27 +22,31 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank (message = " Nome é um campo obrigatorio!")
+	@NotBlank(message = " Nome é um campo obrigatorio!")
 	private String nome;
-	@NotBlank (message = " CPF é um campo obrigatorio!")
+	@NotBlank(message = " CPF é um campo obrigatorio!")
 	private String cpf;
-	@NotBlank (message = " Data de cadastro é um campo obrigatorio!")
+	@NotBlank(message = " Data de cadastro é um campo obrigatorio!")
 	private String datacadastro;
 	
+	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Venda> vendas = new ArrayList();
-	
+
 	public Cliente() {
 
 	}
 
-	public Cliente(Long id, String nome, String cpf, String datacadastro) {
+	public Cliente(Long id, String nome, String cpf, String datacadastro, No primeiroNo ,
+			ListaEncadeada listaEncadeada) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.datacadastro = datacadastro;
+		
 	}
 
 	public Long getId() {
@@ -76,10 +80,12 @@ public class Cliente implements Serializable {
 	public void setDatacadastro(String datacadastro) {
 		this.datacadastro = datacadastro;
 	}
-	
+
 	public List<Venda> getVendas() {
 		return vendas;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -105,7 +111,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }
