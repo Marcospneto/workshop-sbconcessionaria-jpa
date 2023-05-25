@@ -1,6 +1,10 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -17,26 +23,34 @@ public class Venda implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank (message = " Campo datavenda é obrigatorio!")
+	@NotBlank(message = " Campo datavenda é obrigatorio!")
 	private String datavenda;
-	@NotBlank (message = " Campo valortotalvenda é obrigatorio!")
+	@NotBlank(message = " Campo valortotalvenda é obrigatorio!")
 	private String valortotalvenda;
-	@NotBlank (message = " Campo formapagamento é obrigatorio!")
+	@NotBlank(message = " Campo formapagamento é obrigatorio!")
 	private String formapagamento;
-	@NotBlank (message = " Campo vendedor é obrigatorio!")
+	@NotBlank(message = " Campo vendedor é obrigatorio!")
 	private String vendedor;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	@OneToOne
+	@JoinColumn(name = "financeiro_id")
+	private Financeiro financeiro;
+	@OneToOne
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
+	@ManyToOne
+	@JoinColumn(name = "veiculo_id")
+	private Veiculo veiculo;
+	
 
 	public Venda() {
 
 	}
 
-	
-
 	public Venda(Long id, String datavenda, String valortotalvenda, String formapagamento, String vendedor,
-			Cliente cliente) {
+			Cliente cliente, Financeiro financeiro, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.datavenda = datavenda;
@@ -44,9 +58,11 @@ public class Venda implements Serializable {
 		this.formapagamento = formapagamento;
 		this.vendedor = vendedor;
 		this.setCliente(cliente);
+		this.setFinanceiro(financeiro);
+		this.setFuncionario(funcionario);
+		
+	
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -87,13 +103,29 @@ public class Venda implements Serializable {
 	public void setVendedor(String vendedor) {
 		this.vendedor = vendedor;
 	}
-	
+
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Financeiro getFinanceiro() {
+		return financeiro;
+	}
+
+	public void setFinanceiro(Financeiro financeiro) {
+		this.financeiro = financeiro;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override
@@ -120,9 +152,5 @@ public class Venda implements Serializable {
 			return false;
 		return true;
 	}
-
-
-
-	
 
 }

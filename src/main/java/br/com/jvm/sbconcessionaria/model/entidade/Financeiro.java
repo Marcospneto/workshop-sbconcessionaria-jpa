@@ -1,11 +1,18 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -15,12 +22,20 @@ public class Financeiro implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank (message = " Campo receita é obrigatorio!")
+	@NotBlank(message = " Campo receita é obrigatorio!")
 	private String receita;
-	@NotBlank (message = " Campo despesa é obrigatorio!")
+	@NotBlank(message = " Campo despesa é obrigatorio!")
 	private String despesa;
-	@NotBlank (message = " Campo contabilidade é obrigatorio!")
+	@NotBlank(message = " Campo contabilidade é obrigatorio!")
 	private String contabilidade;
+	
+	@OneToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "financeiro")
+	private List<Venda> vendas = new ArrayList();
 
 	public Financeiro() {
 

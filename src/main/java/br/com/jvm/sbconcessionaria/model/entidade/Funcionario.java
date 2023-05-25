@@ -1,11 +1,18 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -25,12 +32,23 @@ public class Funcionario implements Serializable {
 	private String salario;
 	@NotBlank (message = " Campo dataadmissao é obrigatorio!")
 	private String dataadmissao;
+	
+	@OneToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "funcionario")
+	private List<Venda> vendas = new ArrayList();
+	
+	
 
 	public Funcionario() {
 
 	}
 
-	public Funcionario(Long id, String nome, String endereco, String contato, String salario, String dataadmissao) {
+	public Funcionario(Long id, String nome, String endereco, String contato, String salario,
+			String dataadmissao, Empresa empresa) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -38,7 +56,10 @@ public class Funcionario implements Serializable {
 		this.contato = contato;
 		this.salario = salario;
 		this.dataadmissao = dataadmissao;
+		this.setEmpresa(empresa);
 	}
+
+	
 
 	public Long getId() {
 		return id;
@@ -86,6 +107,14 @@ public class Funcionario implements Serializable {
 
 	public void setDataadmissao(String dataadmissao) {
 		this.dataadmissao = dataadmissao;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public static long getSerialversionuid() {
