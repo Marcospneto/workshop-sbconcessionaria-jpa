@@ -1,18 +1,12 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
@@ -34,34 +28,21 @@ public class Venda implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	@OneToOne
-	@JoinColumn(name = "financeiro_id")
-	private Financeiro financeiro;
-	@OneToOne
-	@JoinColumn(name = "funcionario_id")
-	private Funcionario funcionario;
-	@ManyToOne
-	@JoinColumn(name = "veiculo_id")
-	private Veiculo veiculo;
-	
 
 	public Venda() {
 
 	}
 
 	public Venda(Long id, String datavenda, String valortotalvenda, String formapagamento, String vendedor,
-			Cliente cliente, Financeiro financeiro, Funcionario funcionario) {
+			Cliente cliente) {
 		super();
 		this.id = id;
 		this.datavenda = datavenda;
 		this.valortotalvenda = valortotalvenda;
 		this.formapagamento = formapagamento;
 		this.vendedor = vendedor;
-		this.setCliente(cliente);
-		this.setFinanceiro(financeiro);
-		this.setFuncionario(funcionario);
-		
-	
+		this.cliente = cliente;
+
 	}
 
 	public Long getId() {
@@ -110,22 +91,6 @@ public class Venda implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public Financeiro getFinanceiro() {
-		return financeiro;
-	}
-
-	public void setFinanceiro(Financeiro financeiro) {
-		this.financeiro = financeiro;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
 	}
 
 	@Override

@@ -1,39 +1,31 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Veiculo implements Serializable{
+public class Veiculo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank (message = " Campo marca é obrigatorio!")
+	@NotBlank(message = " Campo marca é obrigatorio!")
 	private String marca;
-	@NotBlank (message = " Campo modelo é obrigatorio!")
+	@NotBlank(message = " Campo modelo é obrigatorio!")
 	private String modelo;
-	@NotBlank (message = " Campo ano é obrigatorio!")
+	@NotBlank(message = " Campo ano é obrigatorio!")
 	private String ano;
-	@NotBlank (message = " Campo cor é obrigatorio!")
+	@NotBlank(message = " Campo cor é obrigatorio!")
 	private String cor;
-	@NotBlank (message = " Campo valor é obrigatorio!")
+
 	private float valor;
 
-	@OneToMany(mappedBy = "veiculo")
-	private List<Venda> vendas;
-	
 	public Veiculo() {
 
 	}

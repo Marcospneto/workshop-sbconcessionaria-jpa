@@ -1,17 +1,11 @@
 package br.com.jvm.sbconcessionaria.model.entidade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -26,14 +20,6 @@ public class Empresa implements Serializable {
 	private String cnpj;
 	@NotBlank(message = "Razao social é um campo obrigatorio")
 	private String razaosocial;
-
-	@OneToOne(mappedBy = "empresa")
-	private Financeiro financeiro;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
-	private List<Funcionario> funcionario = new ArrayList();
-
 
 	public Empresa(Long id, String cnpj, String razaosocial) {
 		super();

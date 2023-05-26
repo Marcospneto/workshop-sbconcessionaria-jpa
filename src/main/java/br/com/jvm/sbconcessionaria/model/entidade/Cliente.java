@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.jvm.sbconcessionaria.model.estruturas.ListaEncadeada;
 import br.com.jvm.sbconcessionaria.model.estruturas.No;
 import jakarta.persistence.Entity;
@@ -28,10 +26,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	@NotBlank(message = " Data de cadastro é um campo obrigatorio!")
 	private String datacadastro;
-	
-	
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Venda> vendas = new ArrayList();
 
@@ -39,14 +34,14 @@ public class Cliente implements Serializable {
 
 	}
 
-	public Cliente(Long id, String nome, String cpf, String datacadastro, No primeiroNo ,
+	public Cliente(Long id, String nome, String cpf, String datacadastro, No primeiroNo,
 			ListaEncadeada listaEncadeada) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.datacadastro = datacadastro;
-		
+
 	}
 
 	public Long getId() {
@@ -84,8 +79,6 @@ public class Cliente implements Serializable {
 	public List<Venda> getVendas() {
 		return vendas;
 	}
-
-
 
 	@Override
 	public int hashCode() {

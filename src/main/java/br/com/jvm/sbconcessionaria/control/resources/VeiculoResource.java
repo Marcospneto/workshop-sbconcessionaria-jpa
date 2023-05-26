@@ -41,8 +41,7 @@ public class VeiculoResource {
 	@PostMapping
 	public ResponseEntity<Veiculo> insert (@Valid @RequestBody Veiculo obj){
 		obj = servico.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
